@@ -12,7 +12,7 @@ namespace CargoPal.Data
         }
 
         public int UserId { get; set; }
-        
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }
@@ -25,4 +25,4 @@ namespace CargoPal.Data
         public virtual ICollection<Shipments> Shipments { get; set; }
         public virtual ICollection<Bookings> Bookings { get; set; }
     }
-}
+} 

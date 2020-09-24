@@ -45,19 +45,19 @@ namespace CargoPal.Data
                     .HasColumnName("origin")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                
+
                 entity.Property(e => e.Destination)
                     .IsRequired()
                     .HasColumnName("destination")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                
+
                 entity.Property(e => e.StartDate)
                     .IsRequired()
                     .HasColumnName("startDate")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                
+
                 entity.Property(e => e.EndDate)
                     .IsRequired()
                     .HasColumnName("endDate")
@@ -77,7 +77,7 @@ namespace CargoPal.Data
                     .WithMany(p => p.Shipments)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Shipments__userI__3A81B327");
-                
+
             });
 
             modelBuilder.Entity<Orders>(entity =>
@@ -127,7 +127,7 @@ namespace CargoPal.Data
                     .HasColumnName("receiverName")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                
+
                 entity.Property(e => e.ReceiverPhone)
                     .IsRequired()
                     .HasColumnName("receiverPhone")
@@ -144,12 +144,12 @@ namespace CargoPal.Data
                     .HasColumnName("item")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                
+
                 entity.Property(e=>e.Instructions)
                     .IsRequired()
                     .HasColumnName("instructions")
                     .IsUnicode(false);
-                
+
                 entity.Property(e=>e.Packaging)
                     .IsRequired()
                     .HasColumnName("packaging")

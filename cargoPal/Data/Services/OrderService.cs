@@ -25,7 +25,7 @@ namespace CargoPal.Data
         public Orders GetOrderById(int orderId)
         {
             var orderExist = _CargoPalContext.Orders.FirstOrDefault(o => o.OrderId == orderId);
-            
+
             if (orderExist == null)
             {
                 throw new Exception("Order Not Found");
@@ -69,4 +69,4 @@ namespace CargoPal.Data
             _CargoPalContext.SaveChanges();
         }
     }
-}
+} 

@@ -28,4 +28,4 @@ namespace CargoPal.Data
         public virtual Shipments Shipment { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }
-}
+} 

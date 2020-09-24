@@ -88,28 +88,6 @@ namespace CargoPal.Data
             var userToUpdate = _CargoPalContext.Users
                 .FirstOrDefault(u => u.UserId == userId);
 
-            // if (userToUpdate == null) { throw new Exception("Failed to Update"); }
-
-            // if (!string.IsNullOrWhiteSpace(user.FirstName)) { userToUpdate.FirstName = user.FirstName; }
-            // if (!string.IsNullOrWhiteSpace(user.LastName)) { userToUpdate.LastName = user.LastName; }
-            // if (!string.IsNullOrWhiteSpace(user.Phone)) { userToUpdate.Phone = user.Phone; }
-            // if (!string.IsNullOrWhiteSpace(user.Email) && user.Email != userToUpdate.Email)
-            // {
-            //     if (_CargoPalContext.Users.Any(u => u.Email == user.Email)) { throw new Exception("Email is already registered"); }
-            //     userToUpdate.Email = user.Email;
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(user.BusinessName) && user.BusinessName != userToUpdate.BusinessName)
-            // {
-            //     if (_CargoPalContext.Users.Any(u => u.BusinessName == user.BusinessName)) { throw new Exception("Business Name is already registered"); }
-            //     userToUpdate.BusinessName = user.BusinessName;
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(user.BusinessDescription)) { userToUpdate.BusinessDescription = user.BusinessDescription; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessPhone)) { userToUpdate.BusinessPhone = user.BusinessPhone; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessAddress)) { userToUpdate.BusinessAddress = user.BusinessAddress; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessType)) { userToUpdate.BusinessType = user.BusinessType; }
-
             _CargoPalContext.SaveChanges();
         }
 

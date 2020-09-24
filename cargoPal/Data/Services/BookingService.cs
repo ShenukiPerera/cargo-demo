@@ -100,4 +100,4 @@ namespace CargoPal.Data
             }
         }
     }
-}
+} 
