@@ -7,14 +7,13 @@ namespace CargoPal.Data
     {
         public Bookings()
         {
-            Orders = new HashSet<Orders>();
+            // Orders = new HashSet<Orders>();
         }
 
         public int BookingId { get; set; }
         public int? UserId { get; set; }
         public int? ShipmentId { get; set; }
 
-        public double? BestPrice { get; set; }
         public string ReceiverName { get; set; }
         public string ReceiverPhone { get; set; }
         public string ReceiverAddress { get; set; }
@@ -26,6 +25,6 @@ namespace CargoPal.Data
 
         public virtual Users User { get; set; }
         public virtual Shipments Shipment { get; set; }
-        public virtual ICollection<Orders> Orders { get; set; }
+        // public virtual ICollection<Orders> Orders { get; set; }
     }
-} 
+}
