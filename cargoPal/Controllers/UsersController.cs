@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Text;
@@ -16,7 +15,7 @@ namespace CargoPal.Controllers
     // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-     public class UserController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _service;
         private readonly AppSettings _appSettings;
@@ -26,11 +25,12 @@ namespace CargoPal.Controllers
             this._service = service;
             this._appSettings = appSettings.Value;
         }
+
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticateModel model)
         {
-           try
+            try
             {
                 var user = _service.Authenticate(model);
 
@@ -53,6 +53,7 @@ namespace CargoPal.Controllers
                 {
                     UserId = user.UserId,
                     Email = user.Email,
+                    Type = user.UserType,
                     Token = tokenString
                 });
             }
@@ -61,9 +62,10 @@ namespace CargoPal.Controllers
                 return Unauthorized(authException.Message);
             }
 
-        } 
+        }
+
         [AllowAnonymous]
-        [HttpGet("getusers")]
+        [HttpGet("")]
         public IActionResult GetUsers()
         {
             try
@@ -77,7 +79,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("GetUsers/{userId}")]
+        [HttpGet("{userId}")]
         [AllowAnonymous]
         public IActionResult GetUserById(int userId)
         {
@@ -92,7 +94,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("GetUsers/type/{userType}")]
+        [HttpGet("type/{userType}")]
         [AllowAnonymous]
         public IActionResult GetUserByType(string userType)
         {
@@ -107,7 +109,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpPost("adduser")]
+        [HttpPost("")]
         [AllowAnonymous]
         public IActionResult AddUser([FromBody] Users user)
         {
@@ -127,47 +129,68 @@ namespace CargoPal.Controllers
             }
         }
 
-        // [HttpPut("UpdateUser/{userId}")]
-        // [AllowAnonymous]
-        // public IActionResult UpdateUser(int userId, [FromBody] UserUpdateModel user)
-        // {
-        //     try
-        //     {
-        //         if (!ModelState.IsValid)
-        //         {
-        //             return BadRequest("");
-        //         }
 
-        //         _service.UpdateUser(userId, user);
-        //         return Ok(_service.GetUserById(userId));
-        //     }
-        //     catch (Exception updateUserError)
-        //     {
-        //         return Conflict(updateUserError.Message);
-        //     }
+        [HttpPut("agent/{userId}")]
+        [AllowAnonymous]
+        public IActionResult UpdateAgent(int userId, [FromBody] UpdateAgent agent)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
 
-        // }
+                _service.UpdateAgent(userId, agent);
+                return Ok(_service.GetUserById(userId));
+            }
+            catch (Exception updateUserError)
+            {
+                return Conflict(updateUserError.Message);
+            }
+        }
 
-        // [HttpPut("{userId}/ResetPassword")]
-        // [AllowAnonymous]
-        // public IActionResult ResetPassword(int userId, [FromBody] ResetPasswordModel password)
-        // {
-        //     try
-        //     {
-        //         if (!ModelState.IsValid)
-        //         {
-        //             return BadRequest("");
-        //         }
+        [HttpPut("client/{userId}")]
+        [AllowAnonymous]
+        public IActionResult UpdateClient(int userId, [FromBody] UpdateClient client)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
 
-        //         _service.ResetPassword(userId, password);
-        //         return Ok(_service.GetUserById(userId));
-        //     }
-        //     catch (Exception resetPasswordError)
-        //     {
-        //         return Conflict(resetPasswordError.Message);
-        //     }
+                _service.UpdateClient(userId, client);
+                return Ok(_service.GetUserById(userId));
+            }
+            catch (Exception updateUserError)
+            {
+                return Conflict(updateUserError.Message);
+            }
+        }
 
-        // }
+        [HttpPut("{userId}/ResetPassword")]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(int userId, [FromBody] ResetPassword password)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
+
+                _service.ResetPassword(userId, password);
+                return Ok(_service.GetUserById(userId));
+
+            }
+            catch (Exception error)
+            {
+                return Conflict(error.Message);
+            }
+
+        }
 
 
         // [AllowAnonymous]
@@ -187,11 +210,12 @@ namespace CargoPal.Controllers
         // }
 
         [AllowAnonymous]
-        [HttpDelete("DeleteUser/{userId}")]
+        [HttpDelete("{userId}")]
         public IActionResult DeleteUser(int userId)
         {
             try
             {
+                // check if any pending orders
                 _service.DeleteUser(userId);
                 return Ok("Successfully Deleted User");
             }
@@ -202,6 +226,4 @@ namespace CargoPal.Controllers
 
         }
     }
-
- 
-} ;
+};
