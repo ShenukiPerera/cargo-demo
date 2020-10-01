@@ -69,6 +69,24 @@ export default function LandingScreen(props) {
               >
                 Agent
               </Button>
+
+              <br />
+              <br />
+              <h1>Tracking </h1>
+              <hr style={{ backgroundColor: "white" }} />
+              <Button
+                variant="warning"
+                onClick={() =>
+                  history.push({
+                    pathname: "/tracking",
+                    state: { user: "visitor" },
+                  })
+                }
+                size="lg"
+                style={{ width: "100%", margin: 10 }}
+              >
+                Track Order
+              </Button>
             </div>
           </div>
         </div>
