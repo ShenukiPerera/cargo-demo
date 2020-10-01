@@ -9,10 +9,9 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using CargoPal.Data;
 using CargoPal.Helpers;
+
+
 namespace CargoPal.Controllers
-
-
-namespace Users.Controllers
 {
     // [Authorize]
     [ApiController]
@@ -204,5 +203,5 @@ namespace Users.Controllers
         }
     }
 
-}; 
-} 
+ 
+} ;
